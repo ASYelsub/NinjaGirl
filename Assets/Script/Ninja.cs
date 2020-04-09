@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Ninja : MonoBehaviour
 {
-    float moveX;
+   float moveX;
     bool grounded;
     bool jumping;
 
-    float jumpTime;
+   float jumpTime;
 
 
     public float speed = 1.0f;

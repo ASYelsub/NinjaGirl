@@ -6,6 +6,7 @@
       <e p="Assets" t="Include">
         <e p="Script" t="Include">
           <e p="Controller.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
           <e p="Model.cs" t="Include" />
           <e p="Ninja.cs" t="Include" />
           <e p="View.cs" t="Include" />

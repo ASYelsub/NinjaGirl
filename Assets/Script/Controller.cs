@@ -4,25 +4,38 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+
     float moveX;
     bool grounded;
     bool jumping;
     
-    float jumpTime;
     
-    public float speed = 1.0f;
-    public float jumpspeed = 1.0f;
-    public float maxJumpTime = 1.0f;
-    
-    [SerializeField]
     private Model theModel;
+
     void Start()
-    {
-        
+    { 
+        theModel = GetComponent<GameManager>().theModel;
+        theModel.SetCharacterController(GetComponent<CharacterController>());
     }
 
     void Update()
     {
-        
+        moveX = Input.GetAxis("Horizontal");
+        bool jumpPressed = Input.GetButtonDown("Jump");
+
+    }
+    private void FixedUpdate()
+    {
+        if (jumping)
+        {
+            if (jumpTime > 0.0f)
+            {
+                rb.velocity = new Vector2(moveX * speed, jumpspeed);
+            }
+        }
+        else if (IsGrounded)
+        {
+            rb.velocity = new Vector2(moveX * speed, 0.0f);
+        }
     }
 }
