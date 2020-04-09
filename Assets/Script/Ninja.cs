@@ -15,10 +15,10 @@ public class Ninja : MonoBehaviour
     public float jumpspeed = 1.0f;
     public float maxJumpTime = 1.0f;
 
-    Animator animator;
-    Rigidbody2D rb;
+    Animator animator; //view
+    Rigidbody2D rb; 
     BoxCollider2D boxCollider;
-    SpriteRenderer sprite;
+    SpriteRenderer sprite; //view
 
     void Start()
     {
@@ -38,8 +38,8 @@ public class Ninja : MonoBehaviour
        // Debug.DrawRay(pos2D - (Vector2.up * selfHeightOffset), -Vector2.up * rayLen, Color.red);
         RaycastHit2D hit = Physics2D.Raycast(pos2D - (Vector2.up * selfHeightOffset), -Vector2.up, rayLen);
 
-        grounded = false;
-        if (hit.collider != null)
+        grounded = false; //model
+        if (hit.collider != null)// model
         {
             if (hit.collider.CompareTag("Platform"))
             {
