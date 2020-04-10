@@ -6,26 +6,36 @@ public class View : MonoBehaviour
 {
     Animator animator; 
     Rigidbody2D rb; 
-    BoxCollider2D boxCollider;
-    SpriteRenderer sprite; 
-    
+    SpriteRenderer sprite;
+
     public void SetGrounded(bool isGrounded)
     {
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
 
         animator.SetBool("Grounded", isGrounded);
+        // Animator parameters
     }
 
-    public void SetRotate(Quaternion rot)
+    public void SmallMove(bool smallMove)
     {
-        transform.rotation = rot;
+        sprite.flipX = smallMove;
+    }
+    public void Move(float moveX)
+    {
+        animator.SetFloat("speed", Mathf.Abs(moveX));  
+        // Reverse horizontal 
     }
 
-    public void SetAnimationSpeed(float speed)
+    public void IsGrounded(float moveX, float speed)
     {
-        animator.SetFloat("MoveSpeed", speed);
+        rb.velocity = new Vector2(moveX * speed, 0.0f);
     }
+
+    public void Jumping(float moveX, float speed, float jumpSpeed)
+    {
+        rb.velocity = new Vector2(moveX * speed, jumpSpeed);
+    }
+    
 }

@@ -10,16 +10,16 @@ public class Model
     public float speed = 1.0f;
     public float jumpspeed = 1.0f;
     public float maxJumpTime = 1.0f;
-
+    float smallMove = 0.0001f;
+    private bool jumping;
+    
     // Link to view
     public View myView;
     
     //Link to character controller
     private CharacterController myCharacterController;
-    
-    
-  
-    // Is thre character grounded?
+
+    // Is the character grounded?
     private bool _isGrounded;
 
     public bool IsGrounded
@@ -32,14 +32,12 @@ public class Model
         set
         {
             _isGrounded = value;
-
-           // myView.SetGrounded(_isGrounded); //Update the view.
+            myView.SetGrounded(_isGrounded); //Update the view.
         }
     }
 
-    public void Move(float moveX, float moveY, bool jump)
+    public void Move(float moveX, bool isJumping, bool jumpPressed)
     {
-        // Is platform below us?
         float selfHeightOffset = (boxCollider.size.y / 2.0f) + 0.1f;
         float rayLen =  0.05f;
         Vector2 pos2D = (Vector2)transform.position;
@@ -68,21 +66,25 @@ public class Model
             jumpTime = maxJumpTime;
         }
         jumpTime -= Time.deltaTime;
-
-        // Reverse horizontal 
-        float smallMove = 0.0001f;
+        if (jumping)
+        {
+            if (jumpTime > 0.0f)
+            {
+                myView.Jumping(moveX,speed, jumpspeed);
+            }
+        }
+        else if (IsGrounded)
+        {
+            myView.IsGrounded(moveX,speed);
+        }
         if (moveX < -smallMove)
         {
-            sprite.flipX = true;
+            myView.SmallMove(true);
         }
         else if (moveX > smallMove)
         {
-            sprite.flipX = false;
+            myView.SmallMove(false);
         }
-
-        // Animator parameters
-        animator.SetFloat("speed", Mathf.Abs(moveX));
-        animator.SetBool("grounded", IsGrounded);
     }
 
     public void SetView(View theView)
