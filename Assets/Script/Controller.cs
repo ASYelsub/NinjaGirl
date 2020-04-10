@@ -8,15 +8,14 @@ public class Controller : MonoBehaviour
     bool grounded;
     bool jumping;
     private bool jumpPressed;
-    public BoxCollider2D boxCollider;
-
+    private BoxCollider2D boxCollider;
 
     private Model theModel;
 
     void Start()
     { 
         boxCollider = GetComponent<BoxCollider2D>();
-        theModel = GetComponent<GameManager>().theModel;
+        theModel = GetComponent<GameManager>().aModel;
         theModel.SetCharacterController(GetComponent<CharacterController>());
     }
 
@@ -25,11 +24,16 @@ public class Controller : MonoBehaviour
         moveX = Input.GetAxis("Horizontal");
         jumpPressed = Input.GetButtonDown("Jump");
         // Is platform below us?
-
-
     }
+
     private void FixedUpdate()
     {
-        theModel.Move(moveX,jumping, jumpPressed);
+        float selfHeightOffset = (boxCollider.size.y / 2.0f) + 0.1f;
+        float rayLen =  0.05f;
+        Vector2 pos2D = (Vector2)transform.position;
+        // Debug.DrawRay(pos2D - (Vector2.up * selfHeightOffset), -Vector2.up * rayLen, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(pos2D - (Vector2.up * selfHeightOffset), -Vector2.up, rayLen);
+
+        theModel.Move(moveX, jumpPressed, hit);
     }
 }

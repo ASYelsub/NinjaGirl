@@ -27,7 +27,6 @@ public class Model
         get
         {
             return _isGrounded;
-            
         }
         set
         {
@@ -36,14 +35,9 @@ public class Model
         }
     }
 
-    public void Move(float moveX, bool isJumping, bool jumpPressed)
+    public void Move(float moveX, bool jumpPressed, RaycastHit2D hit)
     {
-        float selfHeightOffset = (boxCollider.size.y / 2.0f) + 0.1f;
-        float rayLen =  0.05f;
-        Vector2 pos2D = (Vector2)transform.position;
-        // Debug.DrawRay(pos2D - (Vector2.up * selfHeightOffset), -Vector2.up * rayLen, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(pos2D - (Vector2.up * selfHeightOffset), -Vector2.up, rayLen);
-
+        
         IsGrounded = false;
         if (hit.collider != null) 
         {
@@ -96,10 +90,6 @@ public class Model
     {
         myCharacterController = theCharacterController;
     }
-
-
-    void Start()
-    {
-    }
+    
     
 }

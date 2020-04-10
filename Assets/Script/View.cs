@@ -13,7 +13,6 @@ public class View : MonoBehaviour
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-
         animator.SetBool("Grounded", isGrounded);
         // Animator parameters
     }

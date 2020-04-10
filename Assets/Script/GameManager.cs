@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Model theModel;
-    void Start()
+    public Model aModel;
+    void Awake()
     {
-        theModel = new Model();
-        theModel.SetView(GetComponent<View>());
+        aModel = new Model();
+        aModel.SetView(GetComponent<View>());
     }
 }
