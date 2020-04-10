@@ -8,12 +8,12 @@ public class View : MonoBehaviour
     Rigidbody2D rb; 
     SpriteRenderer sprite;
 
-    public void SetGrounded(bool isGrounded)
+    public void SetGrounded(bool Grounded)
     {
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        animator.SetBool("Grounded", isGrounded);
+        animator.SetBool("Grounded", Grounded);
         // Animator parameters
     }
 

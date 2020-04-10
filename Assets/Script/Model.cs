@@ -69,7 +69,7 @@ public class Model
         }
         else if (IsGrounded)
         {
-            myView.IsGrounded(moveX,speed);
+            myView.SetGrounded(IsGrounded);
         }
         if (moveX < -smallMove)
         {
